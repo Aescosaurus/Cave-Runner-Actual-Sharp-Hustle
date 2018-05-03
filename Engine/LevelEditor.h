@@ -36,15 +36,15 @@ private:
 
 	const Surface blankSurf = Surface( 32,32 );
 	ImageButton blank = ImageButton( { 20,360 },{ 50,50 },
-		blankSurf,Colors::Gray,Colors::LightGray );
+		blankSurf,Colors::DarkGray,Colors::LightGray );
 	ImageButton block = ImageButton( { 80,360 },{ 50,50 },
-		imgs[0],Colors::Gray,Colors::LightGray );
+		imgs[0],Colors::DarkGray,Colors::LightGray );
 	ImageButton spike = ImageButton( { 140,360 },{ 50,50 },
-		imgs[1],Colors::Gray,Colors::LightGray );
+		imgs[1],Colors::DarkGray,Colors::LightGray );
 	ImageButton enemyb = ImageButton( { 200,360 },{ 50,50 },
-		imgs[2],Colors::Gray,Colors::LightGray );
+		imgs[2],Colors::DarkGray,Colors::LightGray );
 	Button save = Button( { 410,360 },{ 135,55 },"Save",
-		Colors::Gray,Colors::LightGray,myFont );
-	Button load = Button( { 555,360 },{ 135,55 },"Load",
-		Colors::Gray,Colors::LightGray,myFont );
+		Colors::DarkGray,Colors::LightGray,myFont );
+	Button load = Button( { 555,360 },{ 135,55 },"NOPE",
+		Colors::DarkGray,Colors::LightGray,myFont );
 };
