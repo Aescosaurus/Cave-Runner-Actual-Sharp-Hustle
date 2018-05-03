@@ -89,5 +89,8 @@ private:
 	float curTime = 0.0f;
 	GameState state = GameState::Menu;
 	LevelEditor le = LevelEditor( crOrig );
+	static constexpr float textHeight = float( Graphics::ScreenHeight ) / 3.0f;
+	static constexpr float textOffset = float( Graphics::ScreenWidth );
+	float textPos = textOffset / 2.0f;
 	/********************************/
 };

@@ -176,6 +176,8 @@ void Game::UpdateModel()
 				.GetRect().right ),0 ),
 			plats,spikes,enemies );
 	}
+
+	textPos -= moveSpeed * dt;
 }
 
 void Game::Restart()
@@ -193,6 +195,8 @@ void Game::HardRestart()
 
 void Game::SoftRestart()
 {
+	textPos = textOffset / 2.0f;
+
 	curTime = 0.0f;
 	dtMult = 1.0f;
 
@@ -259,4 +263,23 @@ void Game::ComposeFrame()
 
 	crOrig.DrawText( std::to_string( int( curTime ) ),
 		{ gfx.ScreenWidth / 2 - 5,360 },Colors::White,gfx );
+
+	if( textPos + textOffset * 6.0f > 0.0f )
+	{
+		crOrig.DrawText( "W to jumP",
+			Vei2( Vec2{ textPos,textHeight } ),
+			Colors::White,gfx );
+		crOrig.DrawText( "jumPing makes the\nrocks fall",
+			Vei2( Vec2{ textPos + textOffset,textHeight } ),
+			Colors::White,gfx );
+		crOrig.DrawText( "D to dash",
+			Vei2( Vec2{ textPos + textOffset * 2.0f,textHeight } ),
+			Colors::White,gfx );
+		crOrig.DrawText( "Dashing kills enemies",
+			Vei2( Vec2{ textPos + textOffset * 3.0f,textHeight } ),
+			Colors::White,gfx );
+		crOrig.DrawText( "Don't get Pushed back!",
+			Vei2( Vec2{ textPos + textOffset * 4.0f,textHeight } ),
+			Colors::White,gfx );
 	}
+}
