@@ -25,7 +25,8 @@ std::vector<Platform> MapLoader::LoadMap( const std
 
 void MapLoader::AddPlats( const std::string& fileName,
 	const Vei2& posOffset,std::vector<Platform>& plats,
-	std::vector<Spike>& spikes,std::vector<Enemy>& enemies )
+	std::vector<Spike>& spikes,std::vector<Enemy>& enemies,
+	std::vector<Grass>& grasses )
 {
 	Map::Load( fileName );
 
@@ -46,6 +47,11 @@ void MapLoader::AddPlats( const std::string& fileName,
 			else if( Map::Get( x,y ) == '3' )
 			{
 				enemies.emplace_back( Enemy( Vec2( Vei2{ posOffset
+					.x + x * 32,posOffset.y + y * 32 } ) ) );
+			}
+			else if( Map::Get( x,y ) == '4' )
+			{
+				grasses.emplace_back( Grass( Vec2( Vei2{ posOffset
 					.x + x * 32,posOffset.y + y * 32 } ) ) );
 			}
 		}

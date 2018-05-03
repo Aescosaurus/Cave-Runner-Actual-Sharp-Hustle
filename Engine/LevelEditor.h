@@ -23,11 +23,13 @@ private:
 	static constexpr int startX = 0;
 	static constexpr int startY = 0;
 	const Surface enemy = "Images/Enemy.bmp";
+	const Surface grass = "Images/Grass.bmp";
 	const std::vector<Surface> imgs =
 	{
 		Surface( "Images/Block1.bmp" ).GetExpanded( 32,32 ),
 		Surface( "Images/Spike1.bmp" ).GetExpanded( 32,32 ),
-		Surface( enemy,RectI( { 0,0 },16,16 ) ).GetExpanded( 32,32 )
+		Surface( enemy,RectI( { 0,0 },16,16 ) ).GetExpanded( 32,32 ),
+		Surface( grass,RectI( { 0,0 },16,16 ) ).GetExpanded( 32,32 )
 	};
 	Font myFont;
 	std::vector<int> tiles;
@@ -43,6 +45,8 @@ private:
 		imgs[1],Colors::DarkGray,Colors::LightGray );
 	ImageButton enemyb = ImageButton( { 200,360 },{ 50,50 },
 		imgs[2],Colors::DarkGray,Colors::LightGray );
+	ImageButton grassb = ImageButton( { 260,360 },{ 50,50 },
+		imgs[3],Colors::DarkGray,Colors::LightGray );
 	Button save = Button( { 410,360 },{ 135,55 },"Save",
 		Colors::DarkGray,Colors::LightGray,myFont );
 	Button load = Button( { 555,360 },{ 135,55 },"NOPE",

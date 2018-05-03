@@ -27,6 +27,7 @@ void LevelEditor::Update( const Mouse& mouse,int& nLevels,float dt )
 	block.Update( mouse );
 	spike.Update( mouse );
 	enemyb.Update( mouse );
+	grassb.Update( mouse );
 
 	save.Update( mouse );
 	load.Update( mouse );
@@ -38,6 +39,7 @@ void LevelEditor::Update( const Mouse& mouse,int& nLevels,float dt )
 	if( block.IsPressed() ) brush = 1;
 	if( spike.IsPressed() ) brush = 2;
 	if( enemyb.IsPressed() ) brush = 3;
+	if( grassb.IsPressed() ) brush = 4;
 
 	{
 		auto msPos = mouse.GetPos();
@@ -108,6 +110,7 @@ void LevelEditor::Draw( Graphics& gfx ) const
 	block.Draw( gfx );
 	spike.Draw( gfx );
 	enemyb.Draw( gfx );
+	grassb.Draw( gfx );
 
 	save.Draw( gfx );
 	load.Draw( gfx );

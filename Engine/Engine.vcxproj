@@ -150,6 +150,7 @@
     <ClInclude Include="FrameTimer.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Graphics.h" />
+    <ClInclude Include="Grass.h" />
     <ClInclude Include="Keyboard.h" />
     <ClInclude Include="LevelEditor.h" />
     <ClInclude Include="MainWindow.h" />
@@ -181,6 +182,7 @@
     <ClCompile Include="FrameTimer.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Graphics.cpp" />
+    <ClCompile Include="Grass.cpp" />
     <ClCompile Include="Keyboard.cpp" />
     <ClCompile Include="LevelEditor.cpp" />
     <ClCompile Include="Main.cpp" />

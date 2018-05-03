@@ -32,6 +32,7 @@
 #include "Enemy.h"
 #include "Button.h"
 #include "LevelEditor.h"
+#include "Grass.h"
 
 class Game
 {
@@ -70,6 +71,8 @@ private:
 	std::vector<Platform> plats;
 	std::vector<Spike> spikes;
 	std::vector<Enemy> enemies;
+	std::vector<Grass> grasses;
+
 	Button start = Button( { 100,360 },{ 145,55 },
 		"Start",Colors::DarkGray,Colors::SoftGreen,
 		crOrig );
@@ -89,7 +92,7 @@ private:
 	float curTime = 0.0f;
 	GameState state = GameState::Menu;
 	LevelEditor le = LevelEditor( crOrig );
-	static constexpr float textHeight = float( Graphics::ScreenHeight ) / 3.0f;
+	static constexpr float textHeight = float( Graphics::ScreenHeight ) / 6.0f;
 	static constexpr float textOffset = float( Graphics::ScreenWidth );
 	float textPos = textOffset / 2.0f;
 	/********************************/

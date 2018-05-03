@@ -35,7 +35,7 @@ Game::Game( MainWindow& wnd )
 	MapLoader::UpdateNLevels( nMaxLevels );
 
 	MapLoader::AddPlats( MapLoader::GetLevel( 0 ),
-		{ 0,0 },plats,spikes,enemies );
+		{ 0,0 },plats,spikes,enemies,grasses );
 }
 
 void Game::Go()
@@ -174,7 +174,13 @@ void Game::UpdateModel()
 			::RangeI( 1,nMaxLevels ) ),
 			Vei2( int( plats[plats.size() - 1]
 				.GetRect().right ),0 ),
-			plats,spikes,enemies );
+			plats,spikes,enemies,grasses );
+	}
+
+	for( auto& grass : grasses )
+	{
+		grass.Move( { -moveSpeed * dt,0.0f } );
+		grass.Update( dt );
 	}
 
 	textPos -= moveSpeed * dt;
@@ -207,7 +213,7 @@ void Game::SoftRestart()
 	enemies.clear();
 
 	MapLoader::AddPlats( MapLoader::GetLevel( 0 ),
-		{ 0,0 },plats,spikes,enemies );
+		{ 0,0 },plats,spikes,enemies,grasses );
 }
 
 void Game::ComposeFrame()
@@ -248,6 +254,10 @@ void Game::ComposeFrame()
 	for( const Enemy& e : enemies )
 	{
 		e.Draw( gfx );
+	}
+	for( const Grass& g : grasses )
+	{
+		g.Draw( gfx );
 	}
 
 	pl.Draw( gfx );
