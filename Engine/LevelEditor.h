@@ -12,7 +12,7 @@ class LevelEditor
 {
 public:
 	LevelEditor( const Font& ref );
-	void Update( const Mouse& mouse,int& nLevels );
+	void Update( const Mouse& mouse,int& nLevels,float dt );
 	void Draw( Graphics& gfx ) const;
 private:
 	void Save( int& nLevels );
@@ -47,4 +47,7 @@ private:
 		Colors::DarkGray,Colors::LightGray,myFont );
 	Button load = Button( { 555,360 },{ 135,55 },"NOPE",
 		Colors::DarkGray,Colors::LightGray,myFont );
+
+	static constexpr float saveCooldown = 1.5f;
+	float saveTimer = saveCooldown;
 };

@@ -102,4 +102,25 @@ namespace SpriteEffect
 		static constexpr int height_mask = height - 1;
 		int filled;
 	};
+	class Opacity
+	{
+	public:
+		Opacity( Color chroma,Color c,float opacity )
+			:
+			chroma( chroma ),
+			opacity( opacity ),
+			color( c )
+		{}
+		void operator()( Color src,int xDest,int yDest,Graphics& gfx ) const
+		{
+			if( src != chroma )
+			{
+				gfx.PutPixel( xDest,yDest,color,opacity );
+			}
+		}
+	private:
+		Color chroma;
+		Color color;
+		float opacity;
+	};
 }

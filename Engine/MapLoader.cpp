@@ -59,7 +59,7 @@ std::string MapLoader::GetLevel( int n )
 
 void MapLoader::UpdateNLevels( int& n )
 {
-	for( int i = 1; i < 9999999; ++i )
+	for( int i = n; i < 9999999; ++i )
 	{
 		const std::string name = "Maps/Level" + std::to_string( i ) + ".lvl";
 		std::ifstream test( name );

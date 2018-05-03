@@ -48,6 +48,10 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
+	float dt = FrameTimer::Mark() * dtMult;
+
+	if( dt > 0.05f ) dt = 0.0f;
+
 	if( state == GameState::Menu )
 	{
 		start.Update( wnd.mouse );
@@ -64,7 +68,7 @@ void Game::UpdateModel()
 	}
 	else if( state == GameState::LevelEditor )
 	{
-		le.Update( wnd.mouse,nMaxLevels );
+		le.Update( wnd.mouse,nMaxLevels,dt );
 		menu.Update( wnd.mouse );
 		if( menu.IsPressed() ) HardRestart();
 		return;
@@ -74,10 +78,6 @@ void Game::UpdateModel()
 	menu.Update( wnd.mouse );
 	if( restart.IsPressed() ) SoftRestart();
 	if( menu.IsPressed() ) HardRestart();
-
-	float dt = FrameTimer::Mark() * dtMult;
-
-	if( dt > 0.05f ) dt = 0.0f;
 
 	curTime += dt;
 

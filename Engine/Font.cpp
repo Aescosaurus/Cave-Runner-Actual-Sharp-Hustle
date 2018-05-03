@@ -56,6 +56,37 @@ void Font::DrawText( const std::string& text,const Vei2& pos,Color color,Graphic
 	}
 }
 
+void Font::DrawText( const std::string& text,const Vei2& pos,Color color,float opacity,Graphics& gfx ) const
+{
+	// create effect functor
+	//SpriteEffect::Substitution e{ chroma,color };
+	SpriteEffect::Opacity e{ chroma,color,opacity };
+	// curPos is the pos that we are drawing to on the screen
+	auto curPos = pos;
+	for( auto c : text )
+	{
+		// on a newline character, reset x position and move down by 1 glyph height
+		if( c == '\n' )
+		{
+			// carriage return
+			curPos.x = pos.x;
+			// line feed
+			curPos.y += glyphHeight;
+			// we don't want to advance the character position right for a newline
+			continue;
+		}
+		// only draw characters that are on the font sheet
+		// start at firstChar + 1 because might as well skip ' ' as well
+		else if( c >= firstChar + 1 && c <= lastChar )
+		{
+			// use DrawSpriteSubstitute so that we can choose the color of the font rendered
+			gfx.DrawSprite( curPos.x,curPos.y,MapGlyphRect( c ),surf,e );
+		}
+		// advance screen pos for next character
+		curPos.x += glyphWidth + 3;
+	}
+}
+
 RectI Font::MapGlyphRect( char c ) const
 {
 	assert( c >= firstChar && c <= lastChar );
