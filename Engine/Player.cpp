@@ -49,7 +49,7 @@ void Player::Update2( const Keyboard& kbd,float dt )
 	grav += gravAcc;
 	pos.y += grav * dt;
 
-	if( kbd.KeyIsPressed( 'W' ) && canJump )
+	if( kbd.KeyIsPressed( 'W' ) && canJump && dt > 0.0f )
 	{
 		jumping = true;
 		canJump = false;
@@ -68,7 +68,7 @@ void Player::Update2( const Keyboard& kbd,float dt )
 
 	if( dashTimer > dashCooldown )
 	{
-		if( kbd.KeyIsPressed( 'D' ) )
+		if( kbd.KeyIsPressed( 'D' ) && dt > 0.0f )
 		{
 			dashTimer = 0.0f;
 
