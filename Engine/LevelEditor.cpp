@@ -155,4 +155,18 @@ void LevelEditor::Save( int& nLevels )
 
 void LevelEditor::Load()
 {
+	tiles.clear();
+
+	tiles.resize( width * height );
+
+	for( int i = 0; i < width; ++i )
+	{
+		tiles[i] = 1;
+	}
+
+	const int offset = width * height - width;
+	for( int i = 0; i < width; ++i )
+	{
+		tiles[i + offset] = 1;
+	}
 }

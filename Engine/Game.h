@@ -88,6 +88,7 @@ private:
 	Button menu = Button( { 700,360 },{ 125,55 },
 		"Menu",Colors::DarkGray,Colors::LightGray,
 		crOrig );
+
 	float dtMult = 1.0f;
 	float curTime = 0.0f;
 	GameState state = GameState::Menu;

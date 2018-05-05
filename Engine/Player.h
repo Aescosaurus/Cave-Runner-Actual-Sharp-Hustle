@@ -51,7 +51,7 @@ private:
 	Vec2 pos;
 	const Vec2 posOrig;
 	static constexpr int size = 32;
-	Rect hitbox = { pos,float( size ),float( size ) };
+	Rect hitbox = { pos,float( size / 2 ),float( size / 2 ) };
 	// For hit test math.
 	static constexpr int offset = size / 2;
 

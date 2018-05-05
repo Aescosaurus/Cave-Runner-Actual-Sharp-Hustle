@@ -81,7 +81,7 @@ void Player::Update2( const Keyboard& kbd,float dt )
 
 	DashHandler::Update( dt );
 
-	hitbox.MoveTo( pos );
+	hitbox.MoveTo( pos + float( size / 4 ) );
 }
 
 void Player::Draw( Graphics& gfx ) const
