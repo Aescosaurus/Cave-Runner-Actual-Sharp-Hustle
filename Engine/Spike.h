@@ -5,6 +5,7 @@
 #include "Surface.h"
 #include "Graphics.h"
 #include <vector>
+#include "Sound.h"
 
 class Spike
 {
@@ -29,6 +30,8 @@ private:
 	Vec2 pos;
 	Rect hitbox;
 	bool dead = false;
+
+	static Sound crash;
 
 	static constexpr float gravAcc = 0.3f;
 	float grav = 0.0f;

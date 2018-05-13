@@ -27,7 +27,7 @@ void Player::Update( const Keyboard& kbd,float dt )
 
 	vel *= slowdownFactor;
 
-	grav += gravAcc;
+	grav += gravAcc * dt;
 	pos.y += grav * dt;
 
 	if( kbd.KeyIsPressed( 'W' ) && canJump )
@@ -75,6 +75,8 @@ void Player::Update2( const Keyboard& kbd,float dt )
 			DashHandler::AddDash( pos );
 
 			pos.x += float( dashDist );
+
+			slice.Play();
 		}
 	}
 	else dashTimer += dt;

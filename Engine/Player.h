@@ -7,6 +7,8 @@
 #include "Platform.h"
 #include "Anim.h"
 #include "DashHandler.h"
+#include "Codex.h"
+#include "Sound.h"
 
 class Player
 {
@@ -60,6 +62,8 @@ private:
 	const Surface sheet = Surface( "Images/Runner.bmp" )
 		.GetExpanded( 64,32 );
 	Anim running = Anim( 0,0,32,32,2,sheet,0.12f );
+
+	Sound slice = Sound( L"Audio/Slice.wav" );
 
 	float vel = 0.0f;
 	static constexpr float speed = 50.0f;

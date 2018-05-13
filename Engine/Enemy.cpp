@@ -4,6 +4,8 @@ const Surface Enemy
 ::spriteSheet = Surface( "Images/Enemy.bmp" )
 .GetExpanded( size * 4,size * 2 );
 
+Sound Enemy::ouch = Sound( "Audio/Sploosh.wav" );
+
 Enemy::Enemy( const Vec2& pos )
 	:
 	pos( pos ),
@@ -75,6 +77,7 @@ void Enemy::CheckHits( const std::vector<Platform>& plats )
 void Enemy::Destroy()
 {
 	dead = true;
+	ouch.Play();
 	// Spawn particles and stuff here.
 }
 
