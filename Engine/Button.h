@@ -6,6 +6,7 @@
 #include "Graphics.h"
 #include "Rect.h"
 #include "Font.h"
+#include "Sound.h"
 
 class Button
 {
@@ -27,6 +28,7 @@ protected:
 	const Color c1;
 	const Color c2;
 	const Font myFont;
+	static Sound clickNoise;
 };
 
 class ImageButton

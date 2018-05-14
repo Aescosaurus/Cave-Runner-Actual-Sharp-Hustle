@@ -58,7 +58,13 @@ void Game::UpdateModel()
 		quit.Update( wnd.mouse );
 		lvlEditor.Update( wnd.mouse );
 
-		if( start.IsPressed() ) state = GameState::Started;
+		if( start.IsPressed() )
+		{
+			state = GameState::Started;
+
+			beginning.Play();
+			// walk.Play();
+		}
 		if( quit.IsPressed() ) wnd.Kill();
 		if( lvlEditor.IsPressed() ) state = GameState::LevelEditor;
 
@@ -76,7 +82,13 @@ void Game::UpdateModel()
 
 	restart.Update( wnd.mouse );
 	menu.Update( wnd.mouse );
-	if( restart.IsPressed() ) SoftRestart();
+	if( restart.IsPressed() )
+	{
+		SoftRestart();
+
+		beginning.Play();
+		// walk.Play();
+	}
 	if( menu.IsPressed() ) HardRestart();
 
 	curTime += dt;
@@ -189,6 +201,8 @@ void Game::UpdateModel()
 void Game::Restart()
 {
 	dtMult = 0.0f;
+
+	// walk.StopAll();
 }
 
 void Game::HardRestart()
@@ -201,6 +215,8 @@ void Game::HardRestart()
 
 void Game::SoftRestart()
 {
+	// walk.StopAll();
+
 	textPos = textOffset / 2.0f;
 
 	curTime = 0.0f;
@@ -220,7 +236,8 @@ void Game::ComposeFrame()
 {
 	if( state == GameState::Menu )
 	{
-		crOrig.DrawText( "Cave Runner",{ 40,40 },
+		crOrig.DrawText( "Cave Runner Actual SharP RIPoff",
+			{ 40,40 },
 			Colors::White,gfx );
 
 		start.Draw( gfx );

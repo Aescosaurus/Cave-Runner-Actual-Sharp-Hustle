@@ -64,6 +64,7 @@ private:
 	Anim running = Anim( 0,0,32,32,2,sheet,0.12f );
 
 	Sound slice = Sound( L"Audio/Slice.wav" );
+	Sound jump = Sound( L"Audio/Jump.wav" );
 
 	float vel = 0.0f;
 	static constexpr float speed = 50.0f;

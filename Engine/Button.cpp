@@ -1,6 +1,8 @@
 #include "Button.h"
 #include "SpriteEffect.h"
 
+Sound Button::clickNoise = L"Audio/Click.wav";
+
 Button::Button( const Vei2& pos,const Vei2& size,
 	std::string msg,Color c1,Color c2,const Font& f )
 	:
@@ -20,6 +22,8 @@ void Button::Update( const Mouse& ms )
 	if( ms.LeftIsPressed() && highlighted && canClick )
 	{
 		pressed = true;
+
+		clickNoise.Play( 1.0f,0.2f );
 	}
 	else pressed = false;
 

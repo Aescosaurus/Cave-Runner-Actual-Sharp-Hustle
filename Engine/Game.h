@@ -33,6 +33,7 @@
 #include "Button.h"
 #include "LevelEditor.h"
 #include "Grass.h"
+#include "Sound.h"
 
 class Game
 {
@@ -96,5 +97,9 @@ private:
 	static constexpr float textHeight = float( Graphics::ScreenHeight ) / 6.0f;
 	static constexpr float textOffset = float( Graphics::ScreenWidth );
 	float textPos = textOffset / 2.0f;
+
+	Sound beginning = L"Audio/Background.wav";
+	Sound walk = Sound( L"Audio/Step.wav",Sound
+		::LoopType::AutoFullSound );
 	/********************************/
 };

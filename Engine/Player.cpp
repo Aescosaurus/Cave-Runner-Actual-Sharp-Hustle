@@ -34,6 +34,8 @@ void Player::Update( const Keyboard& kbd,float dt )
 	{
 		jumping = true;
 		canJump = false;
+
+		jump.Play();
 	}
 
 	if( jumping )
@@ -54,6 +56,8 @@ void Player::Update2( const Keyboard& kbd,float dt )
 		jumping = true;
 		canJump = false;
 		hasJumped = true;
+
+		jump.Play();
 	}
 
 	if( jumping )
