@@ -236,7 +236,7 @@ void Game::ComposeFrame()
 {
 	if( state == GameState::Menu )
 	{
-		crOrig.DrawText( "Cave Runner Actual SharP RIPoff",
+		crOrig.DrawText( "CAVE RUNNER ACTUAL SHARP RIPOFF",
 			{ 40,40 },
 			Colors::White,gfx );
 
