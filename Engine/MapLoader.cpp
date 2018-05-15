@@ -25,7 +25,8 @@ std::vector<Platform> MapLoader::LoadMap( const std
 
 void MapLoader::AddPlats( const std::string& fileName,
 	const Vei2& posOffset,std::vector<Platform>& plats,
-	std::vector<Spike>& spikes,std::vector<Enemy>& enemies )
+	std::vector<Spike>& spikes,std::vector<Enemy>& enemies,
+	std::vector<Grass>& grasses )
 {
 	Map::Load( fileName );
 
@@ -48,6 +49,11 @@ void MapLoader::AddPlats( const std::string& fileName,
 				enemies.emplace_back( Enemy( Vec2( Vei2{ posOffset
 					.x + x * 32,posOffset.y + y * 32 } ) ) );
 			}
+			else if( Map::Get( x,y ) == '4' )
+			{
+				grasses.emplace_back( Grass( Vec2( Vei2{ posOffset
+					.x + x * 32,posOffset.y + y * 32 } ) ) );
+			}
 		}
 	}
 }
@@ -59,7 +65,7 @@ std::string MapLoader::GetLevel( int n )
 
 void MapLoader::UpdateNLevels( int& n )
 {
-	for( int i = 1; i < 9999999; ++i )
+	for( int i = n; i < 9999999; ++i )
 	{
 		const std::string name = "Maps/Level" + std::to_string( i ) + ".lvl";
 		std::ifstream test( name );

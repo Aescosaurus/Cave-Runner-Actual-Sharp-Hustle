@@ -6,6 +6,7 @@
 #include <vector>
 #include "Platform.h"
 #include "Anim.h"
+#include "Sound.h"
 
 class Enemy
 {
@@ -34,8 +35,12 @@ private:
 	static constexpr int offset = size / 2;
 	Vec2 pos;
 	Rect hitbox;
+
 	static const Surface spriteSheet;
 	Anim move = Anim( 0,0,size * 2,size * 2,2,spriteSheet,0.4f );
+	
+	static Sound ouch;
+
 	bool dead = false;
 	static constexpr float speed = 70.0f;
 	static constexpr float gravAcc = 0.15f;

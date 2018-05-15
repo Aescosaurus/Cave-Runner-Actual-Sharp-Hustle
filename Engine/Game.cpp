@@ -35,7 +35,7 @@ Game::Game( MainWindow& wnd )
 	MapLoader::UpdateNLevels( nMaxLevels );
 
 	MapLoader::AddPlats( MapLoader::GetLevel( 0 ),
-		{ 0,0 },plats,spikes,enemies );
+		{ 0,0 },plats,spikes,enemies,grasses );
 }
 
 void Game::Go()
@@ -48,13 +48,23 @@ void Game::Go()
 
 void Game::UpdateModel()
 {
+	float dt = FrameTimer::Mark() * dtMult;
+
+	if( dt > 0.05f ) dt = 0.0f;
+
 	if( state == GameState::Menu )
 	{
 		start.Update( wnd.mouse );
 		quit.Update( wnd.mouse );
 		lvlEditor.Update( wnd.mouse );
 
-		if( start.IsPressed() ) state = GameState::Started;
+		if( start.IsPressed() )
+		{
+			state = GameState::Started;
+
+			beginning.Play();
+			// walk.Play();
+		}
 		if( quit.IsPressed() ) wnd.Kill();
 		if( lvlEditor.IsPressed() ) state = GameState::LevelEditor;
 
@@ -64,7 +74,7 @@ void Game::UpdateModel()
 	}
 	else if( state == GameState::LevelEditor )
 	{
-		le.Update( wnd.mouse,nMaxLevels );
+		le.Update( wnd.mouse,nMaxLevels,dt );
 		menu.Update( wnd.mouse );
 		if( menu.IsPressed() ) HardRestart();
 		return;
@@ -72,12 +82,14 @@ void Game::UpdateModel()
 
 	restart.Update( wnd.mouse );
 	menu.Update( wnd.mouse );
-	if( restart.IsPressed() ) SoftRestart();
+	if( restart.IsPressed() )
+	{
+		SoftRestart();
+
+		beginning.Play();
+		// walk.Play();
+	}
 	if( menu.IsPressed() ) HardRestart();
-
-	float dt = FrameTimer::Mark() * dtMult;
-
-	if( dt > 0.05f ) dt = 0.0f;
 
 	curTime += dt;
 
@@ -174,13 +186,29 @@ void Game::UpdateModel()
 			::RangeI( 1,nMaxLevels ) ),
 			Vei2( int( plats[plats.size() - 1]
 				.GetRect().right ),0 ),
-			plats,spikes,enemies );
+			plats,spikes,enemies,grasses );
 	}
+
+	for( auto& grass : grasses )
+	{
+		grass.Move( { -moveSpeed * dt,0.0f } );
+		grass.Update( dt );
+	}
+
+	textPos -= moveSpeed * dt;
 }
 
 void Game::Restart()
 {
 	dtMult = 0.0f;
+
+	if( !playedSound )
+	{
+		Spike::Crash.Play();
+		playedSound = true;
+	}
+
+	// walk.StopAll();
 }
 
 void Game::HardRestart()
@@ -193,6 +221,11 @@ void Game::HardRestart()
 
 void Game::SoftRestart()
 {
+	playedSound = false;
+	// walk.StopAll();
+
+	textPos = textOffset / 2.0f;
+
 	curTime = 0.0f;
 	dtMult = 1.0f;
 
@@ -203,14 +236,15 @@ void Game::SoftRestart()
 	enemies.clear();
 
 	MapLoader::AddPlats( MapLoader::GetLevel( 0 ),
-		{ 0,0 },plats,spikes,enemies );
+		{ 0,0 },plats,spikes,enemies,grasses );
 }
 
 void Game::ComposeFrame()
 {
 	if( state == GameState::Menu )
 	{
-		crOrig.DrawText( "Cave Runner",{ 40,40 },
+		crOrig.DrawText( "CAVE RUNNER ACTUAL SHARP HUSTLE",
+			{ 40,40 },
 			Colors::White,gfx );
 
 		start.Draw( gfx );
@@ -245,6 +279,10 @@ void Game::ComposeFrame()
 	{
 		e.Draw( gfx );
 	}
+	for( const Grass& g : grasses )
+	{
+		g.Draw( gfx );
+	}
 
 	pl.Draw( gfx );
 
@@ -259,4 +297,23 @@ void Game::ComposeFrame()
 
 	crOrig.DrawText( std::to_string( int( curTime ) ),
 		{ gfx.ScreenWidth / 2 - 5,360 },Colors::White,gfx );
+
+	if( textPos + textOffset * 6.0f > 0.0f )
+	{
+		crOrig.DrawText( "W to jumP",
+			Vei2( Vec2{ textPos,textHeight } ),
+			Colors::White,gfx );
+		crOrig.DrawText( "jumPing makes the\nrocks fall",
+			Vei2( Vec2{ textPos + textOffset,textHeight } ),
+			Colors::White,gfx );
+		crOrig.DrawText( "D to dash",
+			Vei2( Vec2{ textPos + textOffset * 2.0f,textHeight } ),
+			Colors::White,gfx );
+		crOrig.DrawText( "Dashing kills enemies",
+			Vei2( Vec2{ textPos + textOffset * 3.0f,textHeight } ),
+			Colors::White,gfx );
+		crOrig.DrawText( "Don't get Pushed back!",
+			Vei2( Vec2{ textPos + textOffset * 4.0f,textHeight } ),
+			Colors::White,gfx );
 	}
+}

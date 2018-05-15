@@ -1,4 +1,5 @@
 /******************************************************************************************
+/******************************************************************************************
 *	Chili DirectX Framework Version 16.07.20											  *
 *	MainWindow.cpp																		  *
 *	Copyright 2016 PlanetChili.net <http://www.planetchili.net>							  *
@@ -46,7 +47,7 @@ MainWindow::MainWindow( HINSTANCE hInst,wchar_t * pArgs )
 	wr.top = 100;
 	wr.bottom = Graphics::ScreenHeight + wr.top;
 	AdjustWindowRect( &wr,WS_CAPTION | WS_MINIMIZEBOX | WS_SYSMENU,FALSE );
-	hWnd = CreateWindow( wndClassName,L"Chili DirectX Framework",
+	hWnd = CreateWindow( wndClassName,L"Cave Runner Actual Sharp Hustle",
 		WS_CAPTION | WS_MINIMIZEBOX | WS_SYSMENU,
 		wr.left,wr.top,wr.right - wr.left,wr.bottom - wr.top,
 		nullptr,nullptr,hInst,this );

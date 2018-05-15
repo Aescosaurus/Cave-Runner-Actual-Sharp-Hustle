@@ -13,7 +13,7 @@ LevelEditor::LevelEditor( const Font& ref )
 	{
 		tiles[i] = 1;
 	}
-	
+
 	const int offset = width * height - width;
 	for( int i = 0; i < width; ++i )
 	{
@@ -21,12 +21,13 @@ LevelEditor::LevelEditor( const Font& ref )
 	}
 }
 
-void LevelEditor::Update( const Mouse& mouse,int& nLevels )
+void LevelEditor::Update( const Mouse& mouse,int& nLevels,float dt )
 {
 	blank.Update( mouse );
 	block.Update( mouse );
 	spike.Update( mouse );
 	enemyb.Update( mouse );
+	grassb.Update( mouse );
 
 	save.Update( mouse );
 	load.Update( mouse );
@@ -38,6 +39,7 @@ void LevelEditor::Update( const Mouse& mouse,int& nLevels )
 	if( block.IsPressed() ) brush = 1;
 	if( spike.IsPressed() ) brush = 2;
 	if( enemyb.IsPressed() ) brush = 3;
+	if( grassb.IsPressed() ) brush = 4;
 
 	{
 		auto msPos = mouse.GetPos();
@@ -60,6 +62,8 @@ void LevelEditor::Update( const Mouse& mouse,int& nLevels )
 			}
 		}
 	}
+
+	if( saveTimer <= saveCooldown ) saveTimer += dt;
 }
 
 void LevelEditor::Draw( Graphics& gfx ) const
@@ -106,13 +110,23 @@ void LevelEditor::Draw( Graphics& gfx ) const
 	block.Draw( gfx );
 	spike.Draw( gfx );
 	enemyb.Draw( gfx );
+	grassb.Draw( gfx );
 
 	save.Draw( gfx );
 	load.Draw( gfx );
+
+	if( saveTimer < saveCooldown )
+	{
+		myFont.DrawText( "Saved",{ Graphics::ScreenWidth / 2 -
+			100,Graphics::ScreenHeight / 2 - 50 },Colors::White,
+			saveTimer,gfx );
+	}
 }
 
 void LevelEditor::Save( int& nLevels )
 {
+	saveTimer = 0.0f;
+
 	for( int i = 1; i < 9999999; ++i )
 	{
 		const std::string name = "Maps/Level" + std::to_string( i ) + ".lvl";
@@ -123,7 +137,7 @@ void LevelEditor::Save( int& nLevels )
 		{
 			std::ofstream out( name );
 			// for( int i : tiles )
-			for( int i = 0; i < tiles.size(); ++i )
+			for( int i = 0; i < int( tiles.size() ); ++i )
 			{
 				if( i != 0 && i % width == 0 ) out << '\n';
 				out << tiles[i];
@@ -141,4 +155,18 @@ void LevelEditor::Save( int& nLevels )
 
 void LevelEditor::Load()
 {
+	tiles.clear();
+
+	tiles.resize( width * height );
+
+	for( int i = 0; i < width; ++i )
+	{
+		tiles[i] = 1;
+	}
+
+	const int offset = width * height - width;
+	for( int i = 0; i < width; ++i )
+	{
+		tiles[i + offset] = 1;
+	}
 }

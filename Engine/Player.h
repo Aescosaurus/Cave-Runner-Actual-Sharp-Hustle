@@ -7,6 +7,8 @@
 #include "Platform.h"
 #include "Anim.h"
 #include "DashHandler.h"
+#include "Codex.h"
+#include "Sound.h"
 
 class Player
 {
@@ -51,7 +53,7 @@ private:
 	Vec2 pos;
 	const Vec2 posOrig;
 	static constexpr int size = 32;
-	Rect hitbox = { pos,float( size ),float( size ) };
+	Rect hitbox = { pos,float( size / 2 ),float( size / 2 ) };
 	// For hit test math.
 	static constexpr int offset = size / 2;
 
@@ -60,6 +62,9 @@ private:
 	const Surface sheet = Surface( "Images/Runner.bmp" )
 		.GetExpanded( 64,32 );
 	Anim running = Anim( 0,0,32,32,2,sheet,0.12f );
+
+	Sound slice = Sound( L"Audio/Slice.wav" );
+	Sound jump = Sound( L"Audio/Jump.wav" );
 
 	float vel = 0.0f;
 	static constexpr float speed = 50.0f;

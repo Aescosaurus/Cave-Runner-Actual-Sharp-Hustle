@@ -5,6 +5,7 @@
 #include "Surface.h"
 #include "Graphics.h"
 #include <vector>
+#include "Sound.h"
 
 class Spike
 {
@@ -21,6 +22,8 @@ public:
 
 	const Rect& GetRect() const;
 	bool IsDead() const;
+public:
+	static Sound Crash;
 private:
 	static constexpr int size = 32;
 	int mySurf;

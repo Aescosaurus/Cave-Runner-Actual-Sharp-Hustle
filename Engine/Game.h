@@ -32,6 +32,8 @@
 #include "Enemy.h"
 #include "Button.h"
 #include "LevelEditor.h"
+#include "Grass.h"
+#include "Sound.h"
 
 class Game
 {
@@ -70,6 +72,8 @@ private:
 	std::vector<Platform> plats;
 	std::vector<Spike> spikes;
 	std::vector<Enemy> enemies;
+	std::vector<Grass> grasses;
+
 	Button start = Button( { 100,360 },{ 145,55 },
 		"Start",Colors::DarkGray,Colors::SoftGreen,
 		crOrig );
@@ -85,9 +89,19 @@ private:
 	Button menu = Button( { 700,360 },{ 125,55 },
 		"Menu",Colors::DarkGray,Colors::LightGray,
 		crOrig );
+
 	float dtMult = 1.0f;
 	float curTime = 0.0f;
 	GameState state = GameState::Menu;
 	LevelEditor le = LevelEditor( crOrig );
+	static constexpr float textHeight = float( Graphics::ScreenHeight ) / 6.0f;
+	static constexpr float textOffset = float( Graphics::ScreenWidth );
+	float textPos = textOffset / 2.0f;
+
+	Sound beginning = L"Audio/Background.wav";
+	Sound walk = Sound( L"Audio/Step.wav",Sound
+		::LoopType::AutoFullSound );
+
+	bool playedSound = false;
 	/********************************/
 };

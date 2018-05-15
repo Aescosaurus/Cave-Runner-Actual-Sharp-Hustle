@@ -27,13 +27,15 @@ void Player::Update( const Keyboard& kbd,float dt )
 
 	vel *= slowdownFactor;
 
-	grav += gravAcc;
+	grav += gravAcc * dt;
 	pos.y += grav * dt;
 
 	if( kbd.KeyIsPressed( 'W' ) && canJump )
 	{
 		jumping = true;
 		canJump = false;
+
+		jump.Play();
 	}
 
 	if( jumping )
@@ -54,6 +56,8 @@ void Player::Update2( const Keyboard& kbd,float dt )
 		jumping = true;
 		canJump = false;
 		hasJumped = true;
+
+		jump.Play();
 	}
 
 	if( jumping )
@@ -75,13 +79,15 @@ void Player::Update2( const Keyboard& kbd,float dt )
 			DashHandler::AddDash( pos );
 
 			pos.x += float( dashDist );
+
+			slice.Play();
 		}
 	}
 	else dashTimer += dt;
 
 	DashHandler::Update( dt );
 
-	hitbox.MoveTo( pos );
+	hitbox.MoveTo( pos + float( size / 4 ) );
 }
 
 void Player::Draw( Graphics& gfx ) const
