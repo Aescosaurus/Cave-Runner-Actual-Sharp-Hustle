@@ -101,5 +101,7 @@ private:
 	Sound beginning = L"Audio/Background.wav";
 	Sound walk = Sound( L"Audio/Step.wav",Sound
 		::LoopType::AutoFullSound );
+
+	bool playedSound = false;
 	/********************************/
 };

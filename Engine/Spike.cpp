@@ -3,7 +3,7 @@
 #include "SpriteEffect.h"
 
 std::vector<Surface> Spike::surfs;
-Sound Spike::crash = Sound( "Audio/Crash.wav" );
+Sound Spike::Crash = Sound( "Audio/Crash.wav" );
 
 Spike::Spike( const Vec2& pos )
 	:
@@ -60,7 +60,7 @@ void Spike::OnPlayerJump( float dt )
 		if( Random::RangeI( 0,10 ) > 7 )
 		{
 			falling = true;
-			crash.Play();
+			Crash.Play();
 		}
 	}
 }

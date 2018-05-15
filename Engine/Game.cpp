@@ -202,6 +202,12 @@ void Game::Restart()
 {
 	dtMult = 0.0f;
 
+	if( !playedSound )
+	{
+		Spike::Crash.Play();
+		playedSound = true;
+	}
+
 	// walk.StopAll();
 }
 
@@ -215,6 +221,7 @@ void Game::HardRestart()
 
 void Game::SoftRestart()
 {
+	playedSound = false;
 	// walk.StopAll();
 
 	textPos = textOffset / 2.0f;
@@ -236,7 +243,7 @@ void Game::ComposeFrame()
 {
 	if( state == GameState::Menu )
 	{
-		crOrig.DrawText( "CAVE RUNNER ACTUAL SHARP RIPOFF",
+		crOrig.DrawText( "CAVE RUNNER ACTUAL SHARP HUSTLE",
 			{ 40,40 },
 			Colors::White,gfx );
 

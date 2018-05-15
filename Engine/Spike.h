@@ -22,6 +22,8 @@ public:
 
 	const Rect& GetRect() const;
 	bool IsDead() const;
+public:
+	static Sound Crash;
 private:
 	static constexpr int size = 32;
 	int mySurf;
@@ -30,8 +32,6 @@ private:
 	Vec2 pos;
 	Rect hitbox;
 	bool dead = false;
-
-	static Sound crash;
 
 	static constexpr float gravAcc = 0.3f;
 	float grav = 0.0f;
