@@ -1,2 +1,8 @@
-# Chili Framework
-My fork of the chili framework, includes a lot of the engine improvements made throughout the tutorial series such as Vec2, Rect, Surface and more.
+## Cave Runner Actual Sharp Hustle (CRASH)
+- Quick game made in a couple weeks for fun & practice.
+- This is basically a clone of https://brannanvitek.itch.io/cave-runner
+- Made in [Chili DirectX Framework](https://github.com/planetchili/chili_framework)
+- Sound effects recorded using real life sounds.
+- Music (really just the little intro jingle) made in FL Studio.
+- No color palette used.
+- [Itch page](https://aescosaurus.itch.io/crash)
